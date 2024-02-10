@@ -1,7 +1,7 @@
 "use client"
 
 import { register_user_on_platform } from '@/app/firebase/auth';
-import add_student_to_firestore_db from '@/app/firebase/firestore';
+import { add_student_to_firestore_db } from '@/app/firebase/firestore';
 import { useState } from 'react';
 
 function Signup() {

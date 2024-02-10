@@ -11,13 +11,12 @@ function Signin() {
     const [error, setError] = useState(null);
 
     const handleSubmit = async (event) => {
+
         event.preventDefault();
 
         try {
             const user = await login_user_on_platform(email, password);
-            console.log(user)
         } catch (error) {
-            console.log(error)
             setError(error.message);
         }
 

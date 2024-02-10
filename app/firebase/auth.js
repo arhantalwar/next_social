@@ -1,3 +1,5 @@
+"use client"
+
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { firebaseConfig } from './firebase';
@@ -17,11 +19,14 @@ async function register_user_on_platform(email, pass) {
 }
 
 async function login_user_on_platform(email, pass) {
+
     await signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
-        userCredential.user
+        const user = userCredential.user
+        localStorage.setItem('user', JSON.stringify(user))
     }).catch((err) => {
         console.log(err)
     })
+
 }
 
 export { register_user_on_platform, login_user_on_platform }
