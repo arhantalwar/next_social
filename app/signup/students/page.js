@@ -1,5 +1,5 @@
 "use client"
-
+import Link from 'next/link';
 
 import { register_user_on_platform } from '@/app/firebase/auth';
 import { add_student_to_firestore_db } from '@/app/firebase/firestore';
@@ -61,13 +61,13 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-2'>
                 <input type="text"
-                placeholder="firstname"
+                placeholder="Firstname"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)} />
 
                 <input type="text"
-                placeholder="lastname"
+                placeholder="Lastname"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)} />
@@ -75,15 +75,21 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="tel"
-                placeholder="mobileno"
+                placeholder="Mobile Number"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={mobileno}
-                onChange={(e) => setMobileno(e.target.value)} />
+        onChange={(e) => {
+            const input = e.target.value.replace(/\D/g, ''); 
+            if (input.length <= 10) {
+                setMobileno(input);
+            }
+        }} 
+    />
             </div>
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="text"
-                placeholder="branch"
+                placeholder="Branch"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)} />
@@ -91,7 +97,7 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="text"
-                placeholder="regnumber"
+                placeholder="Reg number"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={regnumber}
                 onChange={(e) => setRegnumber(e.target.value)} />
@@ -99,7 +105,7 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="email"
-                placeholder="Email"
+                placeholder={email.endsWith('@sggs.ac.in') ? 'Email' : 'Email @sggs.ac.in'}
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} />
@@ -130,6 +136,16 @@ function Signup() {
                     Signup
                 </button>
             </div>
+
+            <div className='mt-4 w-full flex justify-center items-center gap-10'>
+          <p>
+            Not a student?{' '}
+            <Link href="/signup/faculty">
+    <span className='text-violet-500'>Faculty Signup</span>
+            </Link>
+          </p>
+        </div>
+
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
