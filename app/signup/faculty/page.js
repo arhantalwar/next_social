@@ -9,11 +9,8 @@ function Signup() {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [mobileno, setMobileno] = useState('');
-
-    const [branch, setBranch] = useState('');
-    const [regnumber, setRegnumber] = useState('');
-
     const [email, setEmail] = useState('');
+    const [valid_code, setvalid_code] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -37,12 +34,12 @@ function Signup() {
 
     return (
 
-        <form onSubmit={handleSubmit} className='w-2/6 h-screen px-10 flex justify-center items-center bg-white'>
+        <form onSubmit={handleSubmit} className='w-2/3 mx-auto h-screen flex justify-center items-center bg-white'>
 
         <div>
 
             <div className='w-full flex justify-start items-center mb-10'>
-                <h1 className='text-7xl font-bold'>Hi There, 👋</h1>
+                <h1 className='text-6xl font-bold'>Hello Faculties!</h1>
             </div>
 
             <div className='w-full flex justify-center items-center gap-2'>
@@ -67,21 +64,7 @@ function Signup() {
                 onChange={(e) => setMobileno(e.target.value)} />
             </div>
 
-            <div className='w-full flex justify-center items-center gap-10 my-4'>
-                <input type="text"
-                placeholder="branch"
-                className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
-                value={branch}
-                onChange={(e) => setBranch(e.target.value)} />
-            </div>
-
-            <div className='w-full flex justify-center items-center gap-10 my-4'>
-                <input type="text"
-                placeholder="regnumber"
-                className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
-                value={regnumber}
-                onChange={(e) => setRegnumber(e.target.value)} />
-            </div>
+        
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="email"
@@ -89,6 +72,14 @@ function Signup() {
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} />
+            </div>
+
+            <div className='w-full flex justify-center items-center gap-10 my-4'>
+                <input type="text"
+                placeholder="Valid Code"
+                className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
+                value={valid_code}
+                onChange={(e) => setvalid_code(e.target.value)} />
             </div>
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>

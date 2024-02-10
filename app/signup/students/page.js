@@ -37,12 +37,12 @@ function Signup() {
 
     return (
 
-        <form onSubmit={handleSubmit} className='w-2/6 h-screen px-10 flex justify-center items-center bg-white'>
+        <form onSubmit={handleSubmit} className='w-2/3 mx-auto h-screen flex justify-center items-center bg-white'>
 
         <div>
 
             <div className='w-full flex justify-start items-center mb-10'>
-                <h1 className='text-7xl font-bold'>Hi There, 👋</h1>
+                <h1 className='text-5xl font-bold'>Hello Students!</h1>
             </div>
 
             <div className='w-full flex justify-center items-center gap-2'>
