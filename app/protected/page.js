@@ -1,6 +1,7 @@
 "use client"
 
 import { redirect } from "next/navigation"
+import Posts from "../components/posts"
 
 const Protected = () => {
 
@@ -10,12 +11,12 @@ const Protected = () => {
         redirect('/login/students')
     }
 
-    let user = JSON.parse(session);
-    console.log(user)
+    let a = JSON.parse(session)
+    console.log(a.email)
 
     return(
         <>
-            <h1>FROM PROTECTED</h1>
+            <Posts />
         </>
     )
 

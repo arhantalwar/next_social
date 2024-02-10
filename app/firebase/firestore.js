@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc  } from 'firebase/firestore';
 import { firebaseConfig } from './firebase';
 
 const app = initializeApp(firebaseConfig);
@@ -22,27 +22,12 @@ async function add_student_to_firestore_db (
         mobileNumber: mobileno ,
         branch: branch,
         regNumber: regnumber,
-        email: email
+        email: email,
+        is_approved: false,
+        posts: []
     };
 
     const docRef = await addDoc(signup_student_to_student_collection, data);
-    console.log('Document added with ID: ', docRef.id);
-
-}
-
-const post_collection = collection(db, 'Posts/');
-
-async function add_new_post_to_collection (
-    post_content,
-    img_url
-)  {
-
-    const data = {
-        post_content: post_content,
-        img_url: img_url,
-    };
-
-    const docRef = await addDoc(post_collection, data);
     console.log('Document added with ID: ', docRef.id);
 
 }
@@ -95,5 +80,49 @@ async function add_admin_to_firestore_db (
 
 }
 
-export { add_student_to_firestore_db, add_faculty_to_firestore_db, add_admin_to_firestore_db, add_new_post_to_collection }
+const post_collection = collection(db, 'Posts/');
+
+async function add_new_post_to_collection (
+    post_content,
+    img_url
+)  {
+
+    const data = {
+        post_content: post_content,
+        img_url: img_url,
+    };
+
+    const docRef = await addDoc(post_collection, data);
+    return docRef.id
+
+}
+
+async function update_student_user_post_array(tofindEmail, postId) {
+
+    const q = query(collection(db, "Users/USERS/students"), where("email", "==", tofindEmail))
+
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach(async (doc) => {
+
+        const docRef = doc.ref
+        const data = doc.data()
+
+        const new_data = {
+            ...data,
+            posts: [...data.posts, postId]
+        }
+
+        await updateDoc(docRef, new_data)
+
+    });
+
+}
+
+export { 
+    add_student_to_firestore_db,
+    add_faculty_to_firestore_db,
+    add_admin_to_firestore_db,
+    add_new_post_to_collection,
+    update_student_user_post_array
+}
 
