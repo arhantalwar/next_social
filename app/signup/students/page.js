@@ -1,6 +1,8 @@
 "use client"
 
+import { register_user_on_platform } from '@/app/firebase/auth';
 import { auth } from '@/app/firebase/firebase';
+import add_student_to_firestore_db from '@/app/firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 
@@ -28,9 +30,22 @@ function Signup() {
         }
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+
+           await register_user_on_platform(email, password)
+
+            await add_student_to_firestore_db(
+                firstname,
+                lastname,
+                mobileno,
+                branch,
+                regnumber,
+                email
+            )
+
         } catch (error) {
+
             setError(error.message);
+
         }
 
     };
