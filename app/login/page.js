@@ -1,33 +1,74 @@
 "use client"
 
-import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from 'firebase/auth';
+import { auth } from '@/app/firebase/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { auth } from '../firebase/firebase';
 
-function Login() {
+function Signup() {
+
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [Password, setPassword] = useState('');
+
     const [error, setError] = useState(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match!');
+            return;
+        }
+
         try {
-            setPersistence(auth, browserSessionPersistence).then(async () => {
-                await signInWithEmailAndPassword(auth, email, password);
-            })
+            await createUserWithEmailAndPassword(auth, email, password);
         } catch (error) {
             setError(error.message);
         }
+
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+
+        <form onSubmit={handleSubmit} className='w-2/6 h-screen px-10 flex justify-center items-center bg-white'>
+
+        <div>
+
+            <div className='w-full flex justify-start items-center mb-10'>
+                <h1 className='text-6xl font-bold'>Student Login</h1>
+            </div>
+
+        
+            <div className='w-full flex justify-center items-center gap-10 my-4'>
+                <input type="email"
+                placeholder="Email ID"
+                className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} />
+            </div>
+        
+            <div className='w-full flex justify-center items-center gap-10 my-4'>
+                <input 
+                type="password"
+                placeholder="Password"
+                className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
+                value={Password}
+                onChange={(e) => setPassword(e.target.value)} />
+            </div>
+
+            <div className='w-full flex justify-center items-center gap-10'>
+                <button 
+                    className='p-4 border-none outline-none rounded-xl text-white text-xl w-full bg-[#AD00FF]'
+                    type="submit">
+                    Login
+                </button>
+            </div>
+
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+
+        </div>
+
         </form>
     );
 }
 
-export default Login;
+export default Signup;
