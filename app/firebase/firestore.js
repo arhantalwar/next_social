@@ -7,7 +7,7 @@ const db = getFirestore(app);
 
 const signup_student_to_student_collection = collection(db, 'Users/USERS/students');
 
-export default async function add_student_to_firestore_db (
+async function add_student_to_firestore_db (
     firstname,
     lastname,
     mobileno,
@@ -29,3 +29,23 @@ export default async function add_student_to_firestore_db (
     console.log('Document added with ID: ', docRef.id);
 
 }
+
+const post_collection = collection(db, 'Posts/POSTS');
+
+async function add_new_post_to_collection (
+    post_content,
+    img_url
+)  {
+
+    const data = {
+        post_content: post_content,
+        img_url: img_url,
+    };
+
+    const docRef = await addDoc(post_collection, data);
+    console.log('Document added with ID: ', docRef.id);
+
+}
+
+export { add_student_to_firestore_db, add_new_post_to_collection }
+
