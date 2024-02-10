@@ -1,8 +1,8 @@
 "use client"
 
-import { auth } from '@/app/firebase/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { register_user_on_platform } from '@/app/firebase/auth';
+import { add_admin_to_firestore_db } from '@/app/firebase/firestore';
 
 function Signup() {
 
@@ -10,7 +10,7 @@ function Signup() {
     const [lastname, setLastname] = useState('');
     const [mobileno, setMobileno] = useState('');
     const [email, setEmail] = useState('');
-    const [admin_code , setadmin_code] = useState('');
+    const [valid_code , setvalid_code] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -25,7 +25,17 @@ function Signup() {
         }
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+
+            await register_user_on_platform(email, password);
+
+            await add_admin_to_firestore_db(
+                firstname,
+                lastname,
+                mobileno,
+                valid_code,
+                email
+            )
+
         } catch (error) {
             setError(error.message);
         }
@@ -75,8 +85,8 @@ function Signup() {
                 <input type="password"
                 placeholder="Admin Code"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
-                value={admin_code}
-                onChange={(e) => setadmin_code(e.target.value)} />
+                value={valid_code}
+                onChange={(e) => setvalid_code(e.target.value)} />
             </div>
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>

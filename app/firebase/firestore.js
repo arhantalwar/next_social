@@ -30,7 +30,7 @@ async function add_student_to_firestore_db (
 
 }
 
-const post_collection = collection(db, 'Posts/POSTS');
+const post_collection = collection(db, 'Posts/');
 
 async function add_new_post_to_collection (
     post_content,
@@ -47,5 +47,53 @@ async function add_new_post_to_collection (
 
 }
 
-export { add_student_to_firestore_db, add_new_post_to_collection }
+const signup_faculty_to_faculty_collection = collection(db, 'Users/USERS/faculty');
+
+async function add_faculty_to_firestore_db (
+    firstname,
+    lastname,
+    mobileno,
+    valid_code,
+    email
+)  {
+
+    // check if valid_code
+
+    const data = {
+        firstName: firstname,
+        lastName: lastname,
+        mobileNumber: mobileno,
+        email: email
+    };
+
+    const docRef = await addDoc(signup_faculty_to_faculty_collection, data);
+    console.log('Document added with ID: ', docRef.id);
+
+}
+
+const signup_admin_to_admin_collection = collection(db, 'Users/USERS/admin');
+
+async function add_admin_to_firestore_db (
+    firstname,
+    lastname,
+    mobileno,
+    valid_code,
+    email
+)  {
+
+    // check if valid_code
+
+    const data = {
+        firstName: firstname,
+        lastName: lastname,
+        mobileNumber: mobileno,
+        email: email
+    };
+
+    const docRef = await addDoc(signup_admin_to_admin_collection, data);
+    console.log('Document added with ID: ', docRef.id);
+
+}
+
+export { add_student_to_firestore_db, add_faculty_to_firestore_db, add_admin_to_firestore_db, add_new_post_to_collection }
 
