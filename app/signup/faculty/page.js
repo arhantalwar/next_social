@@ -1,5 +1,5 @@
 "use client"
-
+import Link from 'next/link';
 import { register_user_on_platform } from '@/app/firebase/auth';
 import { add_faculty_to_firestore_db } from '@/app/firebase/firestore';
 import { useState } from 'react';
@@ -54,13 +54,13 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-2'>
                 <input type="text"
-                placeholder="firstname"
+                placeholder="Firstname"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)} />
 
                 <input type="text"
-                placeholder="lastname"
+                placeholder="Lastname"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)} />
@@ -68,17 +68,23 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="tel"
-                placeholder="mobileno"
+                placeholder="Mobile number"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={mobileno}
-                onChange={(e) => setMobileno(e.target.value)} />
+        onChange={(e) => {
+            const input = e.target.value.replace(/\D/g, ''); 
+            if (input.length <= 10) {
+                setMobileno(input);
+            }
+        }} 
+    />
             </div>
 
         
-
+  
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="email"
-                placeholder="Email"
+                placeholder={email.endsWith('@sggs.ac.in') ? 'Email' : 'Email @sggs.ac.in'}
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} />
@@ -86,7 +92,7 @@ function Signup() {
 
             <div className='w-full flex justify-center items-center gap-10 my-4'>
                 <input type="text"
-                placeholder="Valid Code"
+                placeholder="Faculty Code"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
                 value={valid_code}
                 onChange={(e) => setvalid_code(e.target.value)} />
@@ -117,6 +123,23 @@ function Signup() {
                     Signup
                 </button>
             </div>
+
+            <div className='mt-4 w-full flex justify-center items-center gap-10'>
+          <p>
+            Not a faculty?
+            <Link href="/signup/students">
+    <span className='text-violet-500'>Student Signup</span>
+            </Link>
+          </p>
+        </div>
+
+        <div className='mt-4 w-full flex justify-center items-center gap-10'>
+          <p>
+            <Link href="/signup/admin">
+            <span className='text-violet-400'>Admin signup</span>
+            </Link>
+          </p>
+        </div>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
