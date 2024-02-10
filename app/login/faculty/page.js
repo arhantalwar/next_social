@@ -1,5 +1,5 @@
 "use client"
-
+import Link from 'next/link';
 import { useState } from 'react';
 import { login_user_on_platform } from '@/app/firebase/auth';
 
@@ -56,6 +56,23 @@ function Signin() {
                     Login
                 </button>
             </div>
+            
+            <div className='my-6 w-full flex justify-center items-center gap-10'>
+          <p>
+            Not a faculty?{' '}
+            <Link href="/login/students">
+            <span className='text-violet-400'>Student Login</span>
+            </Link>
+          </p>
+        </div>
+
+        <div className='mt-4 w-full flex justify-center items-center gap-10'>
+          <p>
+            <Link href="/login/admin">
+            <span className='text-violet-400'>Admin Login</span>
+            </Link>
+          </p>
+        </div>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
