@@ -1,26 +1,20 @@
 "use client"
 
-import { auth } from '@/app/firebase/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { login_user_on_platform } from '@/app/firebase/auth';
 
-function Signup() {
+function Signin() {
 
     const [email, setEmail] = useState('');
-    const [Password, setPassword] = useState('');
+    const [password, setPassword] = useState('');
 
     const [error, setError] = useState(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (password !== confirmPassword) {
-            setError('Passwords do not match!');
-            return;
-        }
-
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+            await login_user_on_platform(email, password);
         } catch (error) {
             setError(error.message);
         }
@@ -51,7 +45,7 @@ function Signup() {
                 type="password"
                 placeholder="Password"
                 className='p-4 border-none outline-none rounded-xl bg-[#ECECEC] opacity-2 text-black placeholder-black w-full'
-                value={Password}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)} />
             </div>
 
@@ -71,4 +65,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default Signin;
