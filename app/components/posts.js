@@ -31,34 +31,18 @@ const Posts = () => {
     };
 
     return (
-        <div className="w-full max-w-xl mx-auto mt-8 p-8 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
-            
+        <div className="w-screen max-w-xl mx-auto mt-5 p-8 bg-white rounded-lg drop-shadow-xl">
+
             <textarea
-                className="w-full h-32 p-3 border border-gray-300 rounded-md mb-4 resize-none"
+                className="w-full h-32 p-3 text-2xl
+                           rounded-md mb-4 resize-none outline-none border-none"
                 placeholder="What's on your mind?"
                 value={content}
-                onChange={handleContentChange}
-            ></textarea>
+                onChange={handleContentChange}>
+            </textarea>
 
-            <label className="block mb-4">
-                <span className="text-gray-700 mb-2 block">Add an Image</span>
-                <div className="flex items-center">
-                    <label htmlFor="image-upload" className="cursor-pointer bg-blue-500 
-        text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                        Upload Image
-                    </label>
-                    <input
-                        type="file"
-                        id="image-upload"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="hidden"
-                    />
-                </div>
-            </label>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-start">
                 <button
                     onClick={handlePost}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md
