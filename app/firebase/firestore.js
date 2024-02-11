@@ -90,6 +90,8 @@ async function add_new_post_to_collection (
     const data = {
         post_content: post_content,
         img_url: img_url,
+        likes: 0,
+        comments: []
     };
 
     const docRef = await addDoc(post_collection, data);
@@ -118,11 +120,32 @@ async function update_student_user_post_array(tofindEmail, postId) {
 
 }
 
+async function get_all_posts() {
+    const collectionRef = collection(db, "Posts");
+
+    const querySnapshot = await getDocs(collectionRef);
+
+    let vec_obj = []
+
+    querySnapshot.forEach(async (doc) => {
+
+        // const docRef = doc.ref;
+        const data = doc.data();
+
+        vec_obj.push(data)
+
+    });
+
+    return vec_obj
+
+}
+
 export { 
     add_student_to_firestore_db,
     add_faculty_to_firestore_db,
     add_admin_to_firestore_db,
     add_new_post_to_collection,
-    update_student_user_post_array
+    update_student_user_post_array,
+    get_all_posts
 }
 
