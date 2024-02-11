@@ -70,8 +70,6 @@ function Signin() {
           </p>
         </div>
 
-
-        
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
         </div>

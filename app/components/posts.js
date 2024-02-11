@@ -5,6 +5,7 @@ const Posts = () => {
 
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
+    const [error, setError] = useState(null);
 
     const handleContentChange = (e) => {
         setContent(e.target.value);
@@ -21,12 +22,44 @@ const Posts = () => {
         let parseSession = JSON.parse(session)
         let email = parseSession.email
 
-        const postId = await add_new_post_to_collection(content, image)
+        try {
 
-        await update_student_user_post_array(email, postId);
-        
-        setContent('');
-        setImage(null);
+            const response = await fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: content }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to analyze content');
+            }
+
+            const result = await response.json();
+
+            console.log('Prediction:', result.prediction);
+            console.log('Probability:', result.probability);
+
+            if (result.prediction || result.probability > 0.7) {
+                setError(error.message);
+            } else {
+
+                const postId = await add_new_post_to_collection(content, image)
+
+                await update_student_user_post_array(email, postId);
+
+                setContent('');
+                setImage(null);
+
+            }
+
+
+        } catch (err) {
+
+             console.error('Error:', err.message);
+
+        }
 
     };
 
@@ -49,6 +82,7 @@ const Posts = () => {
         hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                     Post
                 </button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
         </div>
     );

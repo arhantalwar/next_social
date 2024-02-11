@@ -6,9 +6,17 @@ import Posts from "../components/posts";
 const Student = () => {
 	const session = localStorage.getItem("user");
 
-	if (session == null) {
-		redirect("/login/students");
-	}
+    if (session == null) {
+        redirect("/login/students");
+    }
+
+    const [post_data, setPostData] = useState([]);
+
+    useEffect(() => {
+        get_all_posts().then((data) => {
+            setPostData(data);
+        });
+    }, []);
 
 	return (
 		<>
@@ -49,6 +57,15 @@ const Student = () => {
 
 				<div className="w-2/5 h-full bg-white rounded-xl">
 					<Posts />
+        {
+            post_data.map((item) => {
+                return (
+                    <>
+                    <h1>{item.post_content}</h1>
+                    </>
+                )
+            })
+        }
 				</div>
 
 				<div className="w-96 h-full bg-white rounded-xl flex justify-center items-center">
