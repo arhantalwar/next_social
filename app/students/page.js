@@ -2,6 +2,8 @@
 
 import { redirect } from "next/navigation"
 import Posts from "../components/posts"
+import { get_all_posts } from "../firebase/firestore"
+import { useEffect, useState } from "react"
 
 const Student = () => {
 
@@ -10,6 +12,14 @@ const Student = () => {
     if (session == null) {
         redirect('/login/students')
     }
+
+    const [post_data, setPostData] = useState([]);
+
+    useEffect(() => {
+        get_all_posts().then((data) => {
+            setPostData(data);
+        });
+    }, []);
 
     return(
         <>
@@ -38,6 +48,13 @@ const Student = () => {
 
                 <div className="w-2/5 h-full bg-white rounded-xl">
                     <Posts />
+            {
+                post_data.map((item, i) => (
+                    <div key={i}>
+                    {item.post_content}
+                    </div>
+                ))
+            }
                 </div>
 
                 <div className="w-96 h-full bg-white rounded-xl flex justify-center items-center">
