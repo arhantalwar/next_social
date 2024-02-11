@@ -21,6 +21,7 @@ const Student = () => {
         });
     }, []);
 
+
 	return (
 		<>
 			<div className="w-screen h-16 flex items-center justify-between px-10 bg-gradient-to-r from-blue-500 to-purple-300 text-white shadow-lg">
@@ -33,10 +34,12 @@ const Student = () => {
 					<div
 						className="w-full h-24 bg-gradient-to-r from-purple-300 via-pink-400 to-red-200 flex items-center justify-start pl-6 my-2 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
 						onClick={() => {
+
 						}}
 					>
 						<h1 className="text-white">👤 My Profile</h1>
 					</div>
+
 
             <div className="w-screen h-16 flex text-xl items-center justify-between px-10">
                 <h1>Nextians</h1>
@@ -46,6 +49,12 @@ const Student = () => {
 					<div
 						className="w-full h-24 bg-gradient-to-r from-blue-400 via-teal-500 to-green-500 flex items-center justify-start pl-6 my-2 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
 						onClick={() => {
+
+					<div
+						className="w-full h-24 bg-gradient-to-r from-blue-400 via-teal-500 to-green-500 flex items-center justify-start pl-6 my-2 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
+						onClick={() => {
+							/* Handle click for Notifications */
+
 						}}
 					>
 						<h1 className="text-white">🔔 Notifications</h1>
@@ -54,6 +63,7 @@ const Student = () => {
 					<div
 						className="w-full h-24 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 flex items-center justify-start pl-6 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
 						onClick={() => {
+
 						}}
 					>
 						<h1 className="text-white">🔄 Switch User</h1>
@@ -62,6 +72,7 @@ const Student = () => {
 
 				<div className="w-2/5 h-full bg-white rounded-xl">
 					<Posts />
+
                     {
                         post_data.map((item, i) => (
                             <div key={i}>
@@ -69,6 +80,7 @@ const Student = () => {
                             </div>
                         ))
                     }
+
 				</div>
 
 				<div className="w-96 h-full bg-white rounded-xl flex justify-center items-center">
@@ -80,3 +92,4 @@ const Student = () => {
 };
 
 export default Student
+
