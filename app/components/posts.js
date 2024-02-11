@@ -41,9 +41,13 @@ const Posts = () => {
             console.log('Prediction:', result.prediction);
             console.log('Probability:', result.probability);
 
-            if (result.prediction || result.probability > 0.7) {
-                setError(error.message);
+            if (result.prediction > 0.7 || result.probability > 0.7) {
+
+                setError("Offensive");
+
             } else {
+
+                setError("");
 
                 const postId = await add_new_post_to_collection(content, image)
 
@@ -82,7 +86,7 @@ const Posts = () => {
         hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                     Post
                 </button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
         </div>
     );

@@ -120,6 +120,21 @@ async function update_student_user_post_array(tofindEmail, postId) {
 
 }
 
+async function get_user_details(tofindEmail) {
+
+    const q = query(collection(db, "Users/USERS/students"), where("email", "==", tofindEmail))
+
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach(async (doc) => {
+
+        const data = doc.data()
+
+        return data;
+
+    });
+
+}
+
 async function get_all_posts() {
     const collectionRef = collection(db, "Posts");
 
@@ -146,6 +161,7 @@ export {
     add_admin_to_firestore_db,
     add_new_post_to_collection,
     update_student_user_post_array,
-    get_all_posts
+    get_all_posts,
+    get_user_details
 }
 

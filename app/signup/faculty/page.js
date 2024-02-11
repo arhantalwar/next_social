@@ -3,8 +3,11 @@ import Link from 'next/link';
 import { register_user_on_platform } from '@/app/firebase/auth';
 import { add_faculty_to_firestore_db } from '@/app/firebase/firestore';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 function Signup() {
+
+    const router = useRouter();
 
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -39,6 +42,8 @@ function Signup() {
         } catch (error) {
             setError(error.message);
         }
+
+        router.push('/login/faculty')
 
     };
 

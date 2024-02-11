@@ -1,10 +1,13 @@
 "use client"
+
 import Link from 'next/link';
 import { useState } from 'react';
 import { login_user_on_platform } from '@/app/firebase/auth';
-import { find_user_by_email_in_students } from '@/app/firebase/firestore';
+import { useRouter } from 'next/router';
 
 function Signin() {
+
+    const router = useRouter();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,6 +25,8 @@ function Signin() {
         } catch (error) {
             setError(error.message);
         }
+        
+        router.push('/students')
 
     };
 

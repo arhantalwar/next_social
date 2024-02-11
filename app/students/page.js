@@ -2,6 +2,8 @@
 
 import { redirect } from "next/navigation";
 import Posts from "../components/posts";
+import { useEffect, useState } from "react";
+import { get_all_posts } from "../firebase/firestore";
 
 const Student = () => {
 	const session = localStorage.getItem("user");
@@ -30,7 +32,6 @@ const Student = () => {
 					<div
 						className="w-full h-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-300 flex items-center justify-start pl-6 my-2 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
 						onClick={() => {
-							/* Handle click for My Profile */
 						}}
 					>
 						<h1 className="text-white">👤 My Profile</h1>
@@ -39,7 +40,6 @@ const Student = () => {
 					<div
 						className="w-full h-24 bg-gradient-to-r from-blue-400 via-teal-400 to-green-400 flex items-center justify-start pl-6 my-2 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
 						onClick={() => {
-							/* Handle click for Notifications */
 						}}
 					>
 						<h1 className="text-white">🔔 Notifications</h1>
@@ -48,24 +48,23 @@ const Student = () => {
 					<div
 						className="w-full h-24 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-200 flex items-center justify-start pl-6 text-xl rounded-lg hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
 						onClick={() => {
-							/* Handle click for Switch User */
 						}}
 					>
 						<h1 className="text-white">🔄 Switch User</h1>
 					</div>
 				</div>
 
-				<div className="w-2/5 h-full bg-white rounded-xl">
+				<div className="w-2/5 h-full bg-white rounded-xl px-5">
 					<Posts />
-        {
-            post_data.map((item) => {
-                return (
-                    <>
-                    <h1>{item.post_content}</h1>
-                    </>
-                )
-            })
-        }
+                        { post_data.map((item, i) => {
+                                return (
+                                    <div key={i} className="w-full h-28 rounded-xl text-xl px-5 mt-5
+                                    bg-slate-400 text-white flex justify-start items-center">
+                                    {item.post_content}
+                                    </div>
+                                )
+                            })
+                        }
 				</div>
 
 				<div className="w-96 h-full bg-white rounded-xl flex justify-center items-center">

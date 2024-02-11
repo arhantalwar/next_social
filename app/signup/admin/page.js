@@ -3,8 +3,12 @@ import { useState } from 'react';
 import { register_user_on_platform } from '@/app/firebase/auth';
 import { add_admin_to_firestore_db } from '@/app/firebase/firestore';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function Signup() {
+
+    const router = useRouter();
+
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [mobileno, setMobileno] = useState('');
@@ -47,6 +51,9 @@ function Signup() {
         } catch (error) {
             setError(error.message);
         }
+
+        router.push('/login/admin')
+
     };
 
     return (
