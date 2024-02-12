@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { login_user_on_platform } from '@/app/firebase/auth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 function Signin() {
 

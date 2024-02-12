@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { register_user_on_platform } from '@/app/firebase/auth';
 import { add_admin_to_firestore_db } from '@/app/firebase/firestore';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 function Signup() {
 

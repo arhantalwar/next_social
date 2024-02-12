@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { add_new_post_to_collection, update_student_user_post_array } from '../firebase/firestore';
 
-const Posts = () => {
+const Posts = ({ params }) => {
 
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
@@ -11,10 +11,10 @@ const Posts = () => {
         setContent(e.target.value);
     };
 
-    const handleImageChange = (e) => {
-        const selectedImage = e.target.files[0];
-        setImage(selectedImage);
-    };
+    // const handleImageChange = (e) => {
+    //     const selectedImage = e.target.files[0];
+    //     setImage(selectedImage);
+    // };
 
     const handlePost = async () => {
 
@@ -49,9 +49,12 @@ const Posts = () => {
 
                 setError("");
 
-                const postId = await add_new_post_to_collection(content, image)
-
-                await update_student_user_post_array(email, postId);
+                if (params == true) {
+                    const postId = await add_new_post_to_collection(content, image, "Anonymous ")
+                } else {
+                    const postId = await add_new_post_to_collection(content, image, email)
+                    await update_student_user_post_array(email, postId);
+                }
 
                 setContent('');
                 setImage(null);

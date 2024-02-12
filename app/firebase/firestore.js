@@ -84,10 +84,12 @@ const post_collection = collection(db, 'Posts/');
 
 async function add_new_post_to_collection (
     post_content,
-    img_url
+    img_url,
+    email
 )  {
 
     const data = {
+        email: email,
         post_content: post_content,
         img_url: img_url,
         likes: 0,
