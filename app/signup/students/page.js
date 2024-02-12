@@ -151,6 +151,15 @@ function Signup() {
           </p>
         </div>
 
+            <div className='mt-4 w-full flex justify-center items-center gap-10'>
+          <p>
+            Already Have an Account?{' '}
+            <Link href="/login/students">
+    <span className='text-violet-500'>Login Here</span>
+            </Link>
+          </p>
+        </div>
+
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
 

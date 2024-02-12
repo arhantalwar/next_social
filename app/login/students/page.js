@@ -75,6 +75,15 @@ function Signin() {
           </p>
         </div>
 
+            <div className='mt-4 w-full flex justify-center items-center gap-10'>
+          <p>
+            Don't Have an Account?{' '}
+            <Link href="/signup/students">
+    <span className='text-violet-500'>Sign Up Here</span>
+            </Link>
+          </p>
+        </div>
+
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
         </div>
