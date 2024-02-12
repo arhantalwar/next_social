@@ -25,3 +25,6 @@ Login using your details
 # Main Page
 ![Main Page](./Main.png)
 
+# Filter Out Offensive Content
+![Offensive Content](./Offensive.png)
+
