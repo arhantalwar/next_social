@@ -77,8 +77,8 @@ function Signin() {
 
             <div className='mt-4 w-full flex justify-center items-center gap-10'>
           <p>
-            Don't Have an Account?{' '}
-            <Link href="/signup/students">
+            Dont Have an Account?{' '}
+            <Link href="/signup/faculty">
     <span className='text-violet-500'>Sign Up Here</span>
             </Link>
           </p>
